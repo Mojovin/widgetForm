@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виджет</title>
+    <style>
+        #widget{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <button id="toggleButton">Показать виджет</button>
+    
+    <div id="widget">
+        <script src="https://static.elfsight.com/platform/platform.js" async></script>
+        <div class="elfsight-app-ef0a7c08-5bf8-48a0-836f-265c1c40de0c" data-elfsight-app-lazy></div>
+    </div>
+
+    <script>
+        const widgetContainer = document.querySelector('#widget')
+        const button = document.querySelector('#toggleButton')
+        
+        function checkWidgetState() {
+            const isVisible = localStorage.getItem('widgetVisible') === 'true'
+
+            if (isVisible){
+                widgetContainer.style.display = 'block'
+                button.textContent = 'Скрыть виджет'
+            } else{
+                widgetContainer.style.display = 'none'
+                button.textContent = 'Показать виджет'
+            }
+        }
+        
+        function toggleWidget(){
+            const isVisible = widgetContainer.style.display === 'block'
+
+            if (isVisible){
+                widgetContainer.style.display = 'none'
+                button.textContent = 'Показать виджет'
+                localStorage.setItem('widgetVisible', 'false')
+            } else{
+                widgetContainer.style.display = 'block';
+                button.textContent = 'Скрыть виджет'
+                localStorage.setItem('widgetVisible', 'true')
+            }
+        }
+
+        button.addEventListener('click', toggleWidget)
+        window.onload = checkWidgetState
+    </script>
+</body>
+</html>
